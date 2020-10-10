@@ -3,11 +3,21 @@ require("dotenv/config");
 const client = new Discord.Client();
 const axios = require('axios');
 
+ip = 'cheese';
+
 client.once('ready', () => {
     console.log('ready');
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
+axios.get('https://discovery.meethue.com/').then(function (response) {
+    ip = response.data[0].internalipaddress;
+}).catch(function (err) {
+    console.error(err);
+});
+
+
 
 client.on('message', message => {
     if (message.content.startsWith("l?help")) {
@@ -18,7 +28,7 @@ client.on('message', message => {
         message.channel.send('You can use l?color <HSB Color>, to change the color of my light. Ex: l?color 65535 254 254.');
         message.channel.send('WTF is HSB? Go search it up yourself. Also those are the max values you can put.');
     } else if (message.content.startsWith("l?on")) {
-        axios.put('http://192.168.68.100/api/' + process.env.HUE_TOKEN + '/lights/3/state', '{"on": true}')
+        axios.put('http://' + ip + '/api/' + process.env.HUE_TOKEN + '/lights/3/state', '{"on": true}')
             .then((res) => {
                 if (res.status == 200) {
                     message.channel.send('Ight.')
@@ -27,7 +37,7 @@ client.on('message', message => {
                 message.channel.send('Fuck that did not work: ' + err.message);
             });
     } else if (message.content.startsWith("l?off")) {
-        axios.put('http://192.168.68.100/api/' + process.env.HUE_TOKEN + '/lights/3/state', '{"on": false}')
+        axios.put('http://' + ip + '/api/' + process.env.HUE_TOKEN + '/lights/3/state', '{"on": false}')
             .then((res) => {
                 if (res.status == 200) {
                     message.channel.send('Ight.')
@@ -37,7 +47,7 @@ client.on('message', message => {
             });
     } else if (message.content.startsWith("l?bright")) {
         if (message.content.split(" ").length > 1) {
-            axios.put('http://192.168.68.100/api/' + process.env.HUE_TOKEN + '/lights/3/state', '{"on": true, "bri": ' + Math.round(message.content.split(" ")[1] * 2.54) + '}')
+            axios.put('http://' + ip + '/api/' + process.env.HUE_TOKEN + '/lights/3/state', '{"on": true, "bri": ' + Math.round(message.content.split(" ")[1] * 2.54) + '}')
                 .then((res) => {
                     if (res.status == 200) {
                         message.channel.send('Ight.')
@@ -48,7 +58,7 @@ client.on('message', message => {
         }
     } else if (message.content.startsWith("l?color")) {
         if (message.content.split(" ").length > 3) {
-            axios.put('http://192.168.68.100/api/' + process.env.HUE_TOKEN + '/lights/3/state', '{"on": true, "hue": ' + Math.round(parseInt(message.content.split(" ")[1])) + ', "sat": ' + Math.round(parseInt(message.content.split(" ")[2])) + ', "bri": ' + Math.round(parseInt(message.content.split(" ")[3])) + "}")
+            axios.put('http://' + ip + '/api/' + process.env.HUE_TOKEN + '/lights/3/state', '{"on": true, "hue": ' + Math.round(parseInt(message.content.split(" ")[1])) + ', "sat": ' + Math.round(parseInt(message.content.split(" ")[2])) + ', "bri": ' + Math.round(parseInt(message.content.split(" ")[3])) + "}")
                 .then((res) => {
                     if (res.status == 200) {
                         message.channel.send('Ight.')
