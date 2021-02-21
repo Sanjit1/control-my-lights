@@ -22,7 +22,7 @@ client.on('message', message => {
     messageString = message.content;
     if (message.content.startsWith("Sanjit1 »")) {
         messageString = message.content.split("» ").pop();
-        console.log(messageString)
+        console.log(messageString);
     }
     if (message.channel.id == "763986058064822292" || message.channel.id == "752607360077267016" || message.author.id == "542937555251888143" || message.author.id == "775086819775610881") {
         if (messageString.startsWith("l?help")) {
@@ -72,6 +72,15 @@ client.on('message', message => {
                         message.channel.send('Fuck that did not work: ' + err.message);
                     });
             }
+        } else if (messageString.startsWith("l?normal")) {
+            axios.put('http://' + ip + '/api/' + process.env.HUE_TOKEN + '/lights/3/state', '{"on": true, "hue": 0, "sat": 0, "bri": 254}')
+                .then((res) => {
+                    if (res.status == 200) {
+                        message.channel.send('Ight.')
+                    }
+                }).catch((err) => {
+                    message.channel.send('Fuck that did not work: ' + err.message);
+                });
         }
     }
 });
