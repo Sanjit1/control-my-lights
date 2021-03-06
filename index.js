@@ -304,7 +304,10 @@ client.on('message', message => {
                                 setTimeout(() => {
                                     lite.publish('cmnd/SanjitLite/POWER', 'OFF');
                                     setTimeout(() => {
-                                        message.channel.send('<@542937555251888143> Sifu you have been disco\'d.')
+                                        lite.publish('cmnd/SanjitLite/POWER', 'ON');
+                                        setTimeout(() => {
+                                            message.channel.send('<@542937555251888143> Sifu you have been disco\'d.')
+                                        }, 1500);
                                     }, 1500);
                                 }, 1500);
                             }, 1500);
