@@ -58,7 +58,7 @@ client.on('message', message => {
             can_stuff_happen = true;
         }, duration * 1000 * 60);
     } else if (messageString.startsWith("l?") && !(messageString.startsWith("l?l")) && !(messageString.startsWith("l?pain"))) {
-        if (can_stuff_happen) {
+        if (can_stuff_happen || user_id == 'Sanjit1' || user_id == '542937555251888143') {
             var allow_switch = false;
             if (user_id == "Sanjit1" || user_id == "542937555251888143") {
                 allow_switch = true;
@@ -283,7 +283,7 @@ client.on('message', message => {
             }
         }
     } else if (messageString.startsWith("l?l")) {
-        if (can_stuff_happen) {
+        if (can_stuff_happen || user_id == 'Sanjit1' || user_id == '542937555251888143') {
             if (messed_with_large_lite.has(user_id)) {
                 message.channel.send("wait time is like 1 hr from last large lite change lol")
             } else {
