@@ -53,7 +53,7 @@ client.on('message', message => {
         message.channel.send(helpEmbed);
     } else if (messageString.startsWith('l?killbot ') && (user_id == 'Sanjit1' || user_id == "542937555251888143")) {
         duration = messageString.split('killbot ');
-        cant_use_lol = false;
+        can_stuff_happen = false;
         setTimeout(() => {
             can_stuff_happen = true;
         }, duration * 1000 * 60);
