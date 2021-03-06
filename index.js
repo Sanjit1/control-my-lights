@@ -278,7 +278,8 @@ client.on('message', message => {
         if (messed_with_large_lite.has(user_id)) {
             message.channel.send("wait time is like 1 hr from last large lite change lol")
         } else {
-            if (user_id !== '542937555251888143' || user_id !== 'Sanjit1') {
+            if (user_id !== '542937555251888143' && user_id !== 'Sanjit1') {
+
                 messed_with_large_lite.add(user_id);
                 setTimeout(() => {
                     messed_with_large_lite.delete(user_id);
