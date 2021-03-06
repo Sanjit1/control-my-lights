@@ -54,9 +54,13 @@ client.on('message', message => {
     } else if (messageString.startsWith('l?killbot ') && (user_id == 'Sanjit1' || user_id == "542937555251888143")) {
         duration = messageString.split('killbot ');
         can_stuff_happen = false;
+        channel_of_kill = message.channel;
         setTimeout(() => {
             can_stuff_happen = true;
+            channel_of_kill.send('<@542937555251888143> Sifu, ppl can now access lites.')
         }, duration * 1000 * 60);
+    } else if (messageString.startsWith('l?unkillbot ') && (user_id == 'Sanjit1' || user_id == "542937555251888143")) {
+        can_stuff_happen = true;
     } else if (messageString.startsWith("l?") && !(messageString.startsWith("l?l")) && !(messageString.startsWith("l?pain"))) {
         if (can_stuff_happen || user_id == 'Sanjit1' || user_id == '542937555251888143') {
             var allow_switch = false;
@@ -281,6 +285,8 @@ client.on('message', message => {
                     }
                 }
             }
+        } else {
+            message.channel.send('Rip. Sifu is busy or smthng, and doesn\'t want any lite disturbances');
         }
     } else if (messageString.startsWith("l?l")) {
         if (can_stuff_happen || user_id == 'Sanjit1' || user_id == '542937555251888143') {
@@ -326,6 +332,8 @@ client.on('message', message => {
                     message.channel.send('Ight. lol ');
                 }
             }
+        } else {
+            message.channel.send('Rip. Sifu is busy or smthng, and doesn\'t want any lite disturbances');
         }
     } else if (messageString.startsWith('l?pain')) {
         message.channel.send('https://tenor.com/view/pain-painful-rip-gif-19017159');
