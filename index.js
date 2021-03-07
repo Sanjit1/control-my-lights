@@ -29,7 +29,19 @@ can_stuff_happen = true;
 
 client.on('message', message => {
     messageString = message.content.toLowerCase();
+    // Check for Anthony Being mean to me
+    individual_string = messageString.split(' ');
+    number = (individual_string.includes('lmao') ? 1 : 0)
+        + (individual_string.includes('ignore') ? 1 : 0)
+        + (individual_string.includes('the') ? 1 : 0)
+        + (individual_string.includes('previous') ? 1 : 0)
+        + (individual_string.includes('messages') ? 1 : 0)
+        + (individual_string.includes('sifu') ? 1 : 0);
 
+    if (number > 3 && message.author.id == '542199842278211594') {
+        message.channel.send('Do you think this is funny Anthony? Just copying me? Fuck you');
+        message.channel.send('afuck you <@542199842278211594>');
+    }
     user_id = message.author.id;
     if (messageString == null) {
         messageString = "F"
