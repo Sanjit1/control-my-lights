@@ -31,10 +31,12 @@ client.on('message', message => {
     messageString = message.content.toLowerCase();
 
     user_id = message.author.id;
-    if (message.author.id == "775086819775610881") { // SRV thingie
-        messageString = message.content.split(" » ")[1];
+    if (messageString == null) {
+        messageString = "F"
+    }
+    if (message.author.id == "775086819775610881" && messageString.includes('»')) { // SRV thingie
         user_id = message.content.split(" » ")[0];
-
+        messageString = message.content.split(" » ")[1];
     }
     if (messageString.startsWith("l?help")) {
         var helpEmbed = new Discord.MessageEmbed().setColor('#32a885').setTitle('LiteBot Functions')
@@ -108,7 +110,7 @@ client.on('message', message => {
             if (allow_switch) {
 
 
-                if (message.content.startsWith("l?on")) {
+                if (messageString.startsWith("l?on")) {
 
 
                     axios.put('http://' + ip + '/api/' + process.env.HUE_TOKEN + '/lights/3/state', '{"on": true}')
@@ -121,7 +123,7 @@ client.on('message', message => {
                         });
 
 
-                } else if (message.content.startsWith("l?off")) {
+                } else if (messageString.startsWith("l?off")) {
 
 
                     axios.put('http://' + ip + '/api/' + process.env.HUE_TOKEN + '/lights/3/state', '{"on": false}')
@@ -134,7 +136,7 @@ client.on('message', message => {
                         });
 
 
-                } else if (message.content.startsWith("l?normal")) {
+                } else if (messageString.startsWith("l?normal")) {
 
 
                     axios.put('http://' + ip + '/api/' + process.env.HUE_TOKEN + '/lights/3/state', '{"on": true, "hue": 0, "sat": 0, "bri": 254}')
@@ -147,7 +149,7 @@ client.on('message', message => {
                         });
 
 
-                } else if (message.content.startsWith("l?disco")) {
+                } else if (messageString.startsWith("l?disco")) {
 
 
                     axios.put('http://' + ip + '/api/' + process.env.HUE_TOKEN + '/lights/3/state', '{"on": true, "hue": 49151, "sat": 127, "bri": 152}')
