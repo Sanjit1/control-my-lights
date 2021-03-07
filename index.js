@@ -32,7 +32,7 @@ client.on('message', message => {
 
     user_id = message.author.id;
     if (message.author.id == "775086819775610881") { // SRV thingie
-        messageString = message.content.split(" » ")[0];
+        messageString = message.content.split(" » ")[1];
         user_id = message.content.split(" » ")[0];
 
     }
