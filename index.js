@@ -53,15 +53,18 @@ client.on('message', message => {
             ).setFooter("Made you look.")
         message.channel.send(helpEmbed);
     } else if (messageString.startsWith('l?killbot ') && (user_id == 'Sanjit1' || user_id == "542937555251888143")) {
-        duration = messageString.split('killbot ');
+        duration = parseInt(messageString.split('killbot ')[1]) * 60000;
+        console.log(duration)
         can_stuff_happen = false;
         channel_of_kill = message.channel;
+        channel_of_kill.send('Lites Now locked for some time');
         setTimeout(() => {
             can_stuff_happen = true;
             channel_of_kill.send('<@542937555251888143> Sifu, ppl can now access lites.')
-        }, duration * 1000 * 60);
-    } else if (messageString.startsWith('l?unkillbot ') && (user_id == 'Sanjit1' || user_id == "542937555251888143")) {
+        }, duration);
+    } else if (messageString.startsWith('l?unkillbot') && (user_id == 'Sanjit1' || user_id == "542937555251888143")) {
         can_stuff_happen = true;
+        message.channel.send('Lites Unkilled.')
     } else if (messageString.startsWith('l?github')) {
         message.channel.send('Amazing stuff');
         message.channel.send('https://github.com/Sanjit1/control-my-lights');
