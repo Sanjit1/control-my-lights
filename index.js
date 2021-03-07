@@ -48,6 +48,7 @@ client.on('message', message => {
                 { name: "l?large on", value: "Turns off the main lite", inline: true },
                 { name: "l?large off", value: "Turns off the main lite", inline: true },
                 { name: "l?large disco", value: "Turns on disco mode on main lite", inline: true },
+                { name: "l?github", value: "Gives Github link", inline: true },
                 { name: "Clarification", value: "<> is obviously supposed to be omitted lol. and don't use % lol" }
             ).setFooter("Made you look.")
         message.channel.send(helpEmbed);
@@ -61,6 +62,9 @@ client.on('message', message => {
         }, duration * 1000 * 60);
     } else if (messageString.startsWith('l?unkillbot ') && (user_id == 'Sanjit1' || user_id == "542937555251888143")) {
         can_stuff_happen = true;
+    } else if (messageString.startsWith('l?github')) {
+        message.channel.send('Amazing stuff');
+        message.channel.send('https://github.com/Sanjit1/control-my-lights');
     } else if (messageString.startsWith("l?") && !(messageString.startsWith("l?l")) && !(messageString.startsWith("l?pain"))) {
         if (can_stuff_happen || user_id == 'Sanjit1' || user_id == '542937555251888143') {
             var allow_switch = false;
