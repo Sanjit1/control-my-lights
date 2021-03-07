@@ -40,7 +40,7 @@ client.on('message', message => {
 
     if (number > 3 && message.author.id == '542199842278211594') {
         message.channel.send('Do you think this is funny Anthony? Just copying me? Fuck you');
-        message.channel.send('afuck you <@542199842278211594>');
+        message.channel.send('afuck you <@!542199842278211594>');
     }
     user_id = message.author.id;
     if (messageString == null) {
