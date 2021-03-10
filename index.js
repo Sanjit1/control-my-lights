@@ -116,7 +116,7 @@ client.on('message', message => {
                         setTimeout(() => {
                             messed_with_lights.delete(user_id_cuz_bs);
                         }, 360000);
-                    }, 45000);
+                    }, 120000);
                 }
             }
 
@@ -316,10 +316,10 @@ client.on('message', message => {
                 message.channel.send("wait time is like 1 hr from last large lite change lol")
             } else {
                 if (user_id !== '542937555251888143' && user_id !== 'Sanjit1') {
-
-                    messed_with_large_lite.add(user_id);
+                    var lmao_more_class_user_id_bs = user_id;
+                    messed_with_large_lite.add(lmao_more_class_user_id_bs);
                     setTimeout(() => {
-                        messed_with_large_lite.delete(user_id);
+                        messed_with_large_lite.delete(lmao_more_class_user_id_bs);
                     }, 360000);
                 }
                 if (messageString.startsWith("l?large on") || messageString.startsWith("l?lon")) {
