@@ -116,7 +116,7 @@ client.on('message', message => {
                         setTimeout(() => {
                             messed_with_lights.delete(user_id_cuz_bs);
                         }, 360000);
-                    }, 120000);
+                    }, 45000);
                 }
             }
 
@@ -339,13 +339,7 @@ client.on('message', message => {
                                 setTimeout(() => {
                                     lite.publish('cmnd/SanjitLite/POWER', 'ON');
                                     setTimeout(() => {
-                                        lite.publish('cmnd/SanjitLite/POWER', 'OFF');
-                                        setTimeout(() => {
-                                            lite.publish('cmnd/SanjitLite/POWER', 'ON');
-                                            setTimeout(() => {
-                                                message.channel.send('<@542937555251888143> Sifu you have been disco\'d.')
-                                            }, 1500);
-                                        }, 1500);
+                                        message.channel.send('<@542937555251888143> Sifu you have been disco\'d.')
                                     }, 1500);
                                 }, 1500);
                             }, 1500);
