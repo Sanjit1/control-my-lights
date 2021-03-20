@@ -8,6 +8,15 @@ const cant_use_lol = new Set();
 const mqtt = require('mqtt');
 const lite = mqtt.connect("mqtt://192.168.68.15");
 const messed_with_large_lite = new Set();
+const TuyAPI = require('tuyapi');
+const device = new TuyAPI({
+    id: '05214081c4dd572690bd',
+    key: 'e5c485ebd253c34d'
+});
+let stateHasChanged = false;
+device.find().then(() => {
+    device.connect();
+});
 
 
 
@@ -27,9 +36,16 @@ axios.get('https://discovery.meethue.com/').then(function (response) {
 
 can_stuff_happen = true;
 
+function turnMainLite(state) {
+    // lite.publish('cmnd/SanjitLite/POWER', state ? 'ON' : 'OFF');
+    // If I am using mqtt then this otherwise
+    device.set({ set: state }).then();
+}
+
+
 client.on('message', message => {
     messageString = message.content.toLowerCase();
-    // Check for Anthony Being mean to me
+    // Check for Anthony Being mean to bot
     individual_string = messageString.split(' ');
     number = (individual_string.includes('lmao') ? 1 : 0)
         + (individual_string.includes('ignore') ? 1 : 0)
@@ -323,21 +339,21 @@ client.on('message', message => {
                     }, 360000);
                 }
                 if (messageString.startsWith("l?large on") || messageString.startsWith("l?lon")) {
-                    lite.publish('cmnd/SanjitLite/POWER', 'ON');
+                    turnMainLite(true);
                     message.channel.send('Ight. lol');
                 } else if (messageString.startsWith("l?large off") || messageString.startsWith("l?loff")) {
-                    lite.publish('cmnd/SanjitLite/POWER', 'OFF');
+                    turnMainLite(false);
                     message.channel.send('Ight. lol');
                 } else if (messageString.startsWith("l?large disco") || messageString.startsWith("l?ldisco")) {
-                    lite.publish('cmnd/SanjitLite/POWER', 'ON');
+                    turnMainLite(true);
                     setTimeout(() => {
-                        lite.publish('cmnd/SanjitLite/POWER', 'OFF');
+                        turnMainLite(false);
                         setTimeout(() => {
-                            lite.publish('cmnd/SanjitLite/POWER', 'ON');
+                            turnMainLite(true);
                             setTimeout(() => {
-                                lite.publish('cmnd/SanjitLite/POWER', 'OFF');
+                                turnMainLite(false);
                                 setTimeout(() => {
-                                    lite.publish('cmnd/SanjitLite/POWER', 'ON');
+                                    turnMainLite(true);
                                     setTimeout(() => {
                                         message.channel.send('<@542937555251888143> Sifu you have been disco\'d.')
                                     }, 1500);
