@@ -18,7 +18,9 @@ device.find().then(() => {
     device.connect();
 });
 
-
+device.on('error', error => {
+  console.log('Fine now this error has been handled lol ', error);
+});
 
 var ip = 'cheese';
 client.once('ready', () => {
