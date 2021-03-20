@@ -19,7 +19,7 @@ device.find().then(() => {
 });
 
 device.on('error', error => {
-  console.log('Fine now this error has been handled lol ', error);
+    console.log('Fine now this error has been handled lol ', error);
 });
 
 var ip = 'cheese';
@@ -44,6 +44,7 @@ function turnMainLite(state) {
     device.set({ set: state }).then();
 }
 
+// device.on('data', data => { device.get().then(state => lite.publish('cmnd/SanjitLite/POWER', state ? 'ON' : 'OFF')) });
 
 client.on('message', message => {
     messageString = message.content.toLowerCase();
