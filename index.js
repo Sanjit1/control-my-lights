@@ -95,6 +95,14 @@ client.on('message', message => {
         setTimeout(() => {
             can_stuff_happen = true;
             channel_of_kill.send('<@542937555251888143> Sifu, ppl can now access lites.')
+        }, 25200000);
+    } else if (messageString.startsWith('l?sleep ') && (user_id == 'Sanjit1' || user_id == "542937555251888143")) {
+        can_stuff_happen = false;
+        channel_of_kill = message.channel;
+        channel_of_kill.send('Lites Now locked for some time');
+        setTimeout(() => {
+            can_stuff_happen = true;
+            channel_of_kill.send('<@542937555251888143> Sifu, ppl can now access lites.')
         }, duration);
     } else if (messageString.startsWith('l?unkillbot') && (user_id == 'Sanjit1' || user_id == "542937555251888143")) {
         can_stuff_happen = true;
