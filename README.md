@@ -1,5 +1,5 @@
 # control-my-lights
- This Discord bot will let you control my lights. Why the fuck would I want to give other people access to my lights? I think this is a bad Idea...
+ This Discord bot will let you control my lights. Why would I want to give other people access to my lights? I think this is a bad Idea...
  
  Welp an upgrade later. This bot can control ALL my lights. Yea. ALL. Slightly scarier, but no one abuses it so 🤷‍♀️.
 
