@@ -17,6 +17,7 @@ let stateHasChanged = false;
 device.find().then(() => {
     device.connect();
 });
+var sifu;
 
 device.on('error', error => {
     console.log('Fine now this error has been handled lol ', error);
@@ -25,6 +26,8 @@ device.on('error', error => {
 var ip = 'cheese';
 client.once('ready', () => {
     console.log('ready');
+    client.users.fetch('542937555251888143')
+        .then(user => sifu = user);
 });
 
 client.login(process.env.DISCORD_TOKEN);
@@ -48,20 +51,6 @@ function turnMainLite(state) {
 
 client.on('message', message => {
     messageString = message.content.toLowerCase();
-    // Check for Anthony Being mean to bot
-    individual_string = messageString.split(' ');
-    number = (individual_string.includes('lmao') ? 1 : 0)
-        + (individual_string.includes('ignore') ? 1 : 0)
-        + (individual_string.includes('the') ? 1 : 0)
-        + (individual_string.includes('previous') ? 1 : 0)
-        + (individual_string.includes('messages') ? 1 : 0)
-        + (individual_string.includes('sifu') ? 1 : 0);
-
-    if (number > 3 && message.author.id == '542199842278211594') {
-        //console.log('f')
-        message.channel.send('Do you think this is funny Anthony? Just copying me? Fuck you');
-        message.channel.send('afuck you <@!542199842278211594> ');
-    }
     user_id = message.author.id;
     if (messageString == null) {
         messageString = "F"
@@ -70,6 +59,8 @@ client.on('message', message => {
         user_id = message.content.split(" » ")[0];
         messageString = message.content.split(" » ")[1];
     }
+    date = new Date();
+    sleepy_time = sifu.presence.status == "offline" && (date.getHours() < 6 && date.getHours() > 22)
     if (message.channel.id == '827062913100939275' && message.content.startsWith('l?')) {
         message.channel.send('LiteBot wont work here. Verify your identity first');
     } else {
@@ -98,7 +89,7 @@ client.on('message', message => {
             setTimeout(() => {
                 can_stuff_happen = true;
                 channel_of_kill.send('<@542937555251888143> Sifu, ppl can now access lites.')
-            }, 25200000);
+            }, duration);
         } else if (messageString.startsWith('l?sleep ') && (user_id == 'Sanjit1' || user_id == "542937555251888143")) {
             can_stuff_happen = false;
             channel_of_kill = message.channel;
@@ -106,7 +97,7 @@ client.on('message', message => {
             setTimeout(() => {
                 can_stuff_happen = true;
                 channel_of_kill.send('<@542937555251888143> Sifu, ppl can now access lites.')
-            }, duration);
+            }, 25200000);
         } else if (messageString.startsWith('l?unkillbot') && (user_id == 'Sanjit1' || user_id == "542937555251888143")) {
             can_stuff_happen = true;
             message.channel.send('Lites Unkilled.')
@@ -114,9 +105,9 @@ client.on('message', message => {
             message.channel.send('Amazing stuff');
             message.channel.send('https://github.com/Sanjit1/control-my-lights');
         } else if (messageString.startsWith("l?") && !(messageString.startsWith("l?l")) && !(messageString.startsWith("l?pain"))) {
-            if (can_stuff_happen || user_id == 'Sanjit1' || user_id == '542937555251888143') {
+            if ((can_stuff_happen && !sleepy_time) || user_id == '542937555251888143') {
                 var allow_switch = false;
-                if (user_id == "Sanjit1" || user_id == "542937555251888143") {
+                if (user_id == "542937555251888143") {
                     allow_switch = true;
                 } else {
                     if (messed_with_lights.has(user_id)) {
@@ -338,10 +329,14 @@ client.on('message', message => {
                     }
                 }
             } else {
-                message.channel.send('Rip. Sifu is busy or smthng, and doesn\'t want any lite disturbances');
+                if (sleepy_time) {
+                    message.channel.send('Rip. Sifu likely asleep.')
+                } else {
+                    message.channel.send('Rip. Sifu is busy or smthng, and doesn\'t want any lite disturbances');
+                }
             }
         } else if (messageString.startsWith("l?l")) {
-            if (can_stuff_happen || user_id == 'Sanjit1' || user_id == '542937555251888143') {
+            if ((can_stuff_happen && !sleepy_time) || user_id == '542937555251888143') {
                 if (messed_with_large_lite.has(user_id)) {
                     message.channel.send("wait time is like 1 hr from last large lite change lol")
                 } else {
