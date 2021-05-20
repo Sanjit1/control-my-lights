@@ -60,7 +60,7 @@ client.on('message', message => {
         messageString = message.content.split(" » ")[1];
     }
     date = new Date();
-    sleepy_time = sifu.presence.status == "offline" && (date.getHours() < 6 && date.getHours() > 22)
+    sleepy_time = sifu.presence.status == "offline" && (date.getHours() < 6 || date.getHours() > 22)
     if (message.channel.id == '827062913100939275' && message.content.startsWith('l?')) {
         message.channel.send('LiteBot wont work here. Verify your identity first');
     } else {
