@@ -82,7 +82,6 @@ client.on('message', message => {
             message.channel.send(helpEmbed);
         } else if (messageString.startsWith('l?killbot ') && (user_id == 'Sanjit1' || user_id == "542937555251888143")) {
             duration = parseInt(messageString.split('killbot ')[1]) * 60000;
-            console.log(duration)
             can_stuff_happen = false;
             channel_of_kill = message.channel;
             channel_of_kill.send('Lites Now locked for some time');
