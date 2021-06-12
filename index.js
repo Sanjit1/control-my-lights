@@ -10,14 +10,19 @@ const lite = mqtt.connect("mqtt://192.168.68.15");
 const messed_with_large_lite = new Set();
 const TuyAPI = require('tuyapi');
 const device = new TuyAPI({
-    id: '05214081c4dd572690bd',
-    key: 'e5c485ebd253c34d'
+    id: process.env.LARGE_LITE_ID,
+    key: process.env.LARGE_LITE_KEY
 });
 let stateHasChanged = false;
 device.find().then(() => {
     device.connect();
 });
+const sifuID = '542937555251888143';
+const sanjitBotTestingID = '818229925517590558';
+const liteAuditID = '853150197173321738';
 var sifu;
+var sanjitBotTesting;
+var liteAudit;
 
 device.on('error', error => {
     console.log('Fine now this error has been handled lol ', error);
@@ -26,8 +31,10 @@ device.on('error', error => {
 var ip = 'cheese';
 client.once('ready', () => {
     console.log('ready');
-    client.users.fetch('542937555251888143')
+    client.users.fetch(sifuID)
         .then(user => sifu = user);
+    sanjitBotTesting = client.guilds.cache.get(sanjitBotTestingID);
+    liteAudit = sanjitBotTesting.channels.cache.get(liteAuditID)
 });
 
 client.login(process.env.DISCORD_TOKEN);
@@ -61,7 +68,8 @@ client.on('message', message => {
     }
     date = new Date();
     sleepy_time = sifu.presence.status == "offline" && (date.getHours() < 6 || date.getHours() > 22)
-    if (message.channel.id == '827062913100939275' && message.content.startsWith('l?')) {
+
+    if ((message.channel.id == '827062913100939275' || (message.channel.type == 'dm' && message.author.id != sifuID)) && message.content.startsWith('l?')) {
         message.channel.send('LiteBot wont work here. Verify your identity first');
     } else {
         if (messageString.startsWith("l?help")) {
