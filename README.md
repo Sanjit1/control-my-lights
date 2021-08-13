@@ -3,7 +3,7 @@
  
  Welp an upgrade later. This bot can control ALL my lights. Yea. ALL. Slightly scarier, but no one abuses it so 🤷‍♀️.
 
- LiteBot is available in Faker's Left Nut(Jonathan's server) or the public LiteBot server. Server Invite: https://discord.gg/C9pZHDNgrY. 
+ LiteBot is available in the public LiteBot server. Server Invite: https://discord.gg/C9pZHDNgrY. 
  To use my lights: Make sure that you go to #unreal ppl and tell me who you are. Lites wont work in unreal ppl.
 
  
