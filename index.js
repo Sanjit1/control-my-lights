@@ -93,8 +93,44 @@ client.on("message", (msg) => {
                     value: "<> is obviously supposed to be omitted lol. and don't use % lol",
                 }
             )
-            .setFooter("Made you look.");
+            .setFooter("Made you look. kp");
         msg.channel.send(helpEmbed);
+    } else if (
+        (message.startsWith("p") || message.startsWith("k")) &&
+        (user_id == "Sanjit1" || user_id == "542937555251888143")
+    ) {
+        if (message == "p2") {
+            broker.publish(
+                "Ecosystem",
+                '{"device": "hue", "data": {"light": 3, "payload": {"on": true}}}'
+            );
+        } else if (message == "p3") {
+            broker.publish(
+                "Ecosystem",
+                '{"device": "hue", "data": {"light": 3, "payload": {"on": false}}}'
+            );
+        } else if (message == "p1") {
+            broker.publish(
+                "Ecosystem",
+                '{"device": "hue", "data": {"light": 3, "payload": {"on": true, "hue": 0, "sat": 0, "bri": 254}}}'
+            );
+        } else if (message == "k2") {
+            broker.publish(
+                "Ecosystem",
+                '{"device": "hue", "data": {"light": 2, "payload": {"on": true}}}'
+            );
+        } else if (message == "k3") {
+            broker.publish(
+                "Ecosystem",
+                '{"device": "hue", "data": {"light": 2, "payload": {"on": false}}}'
+            );
+        } else if (message == "k1") {
+            broker.publish(
+                "Ecosystem",
+                '{"device": "hue", "data": {"light": 2, "payload": {"on": true, "hue": 0, "sat": 0, "bri": 254}}}'
+            );
+        }
+        msg.channel.send("k done");
     } else if (
         message.startsWith("l?killbot ") &&
         (user_id == "Sanjit1" || user_id == "542937555251888143")
@@ -211,6 +247,7 @@ client.on("message", (msg) => {
                                 "}}}"
                         );
                     }
+                    msg.channel.send("Ping pong ");
                     var x = 0;
                     interval = setInterval(() => {
                         broker.publish(
@@ -233,6 +270,7 @@ client.on("message", (msg) => {
                         }, 1111);
                         if (++x == 5) {
                             clearInterval(interval);
+                            msg.channel.send(":sadge: ping pong over");
                         }
                     }, 2222);
                 } else {
@@ -268,7 +306,9 @@ client.on("message", (msg) => {
                     } else if (func == "normal") {
                         broker.publish(
                             "Ecosystem",
-                            '{"device": "hue", "data": {"light": 3, "payload": {"on": true, "hue": 0, "sat": 0, "bri": 254}}}'
+                            '{"device": "hue", "data": {"light": ' +
+                                liteToFlick +
+                                ', "payload": {"on": true, "hue": 0, "sat": 0, "bri": 254}}}'
                         );
                         msg.channel.send("Ight. lol. made lite normal");
                     } else if (func == "disco") {
@@ -278,7 +318,9 @@ client.on("message", (msg) => {
                             s = Math.floor(Math.random() * 30) + 220;
                             broker.publish(
                                 "Ecosystem",
-                                '{"device": "hue", "data": {"light": 3, "payload": {"on": true, "hue": ' +
+                                '{"device": "hue", "data": {"light": ' +
+                                    liteToFlick +
+                                    ', "payload": {"on": true, "hue": ' +
                                     (h % 65535) +
                                     ', "sat": ' +
                                     s +
